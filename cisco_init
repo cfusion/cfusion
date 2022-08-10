@@ -1,0 +1,81 @@
+Cisco Commands
+sh ip int brief //show active ports
+show cdp neighbors detail // show cisco neighbors 
+show mac address-table | include aa11.bb22.cc33 //show mac address
+show running-config interface gi1/0/1  //show config of interface
+sh ip arp gi1/0/1 //to show ip address for device on this port
+show power inline //show power of interface
+Bring interface to default // default interface 
+
+***Channel Port***
+Interface po1
+switchport mode trunk
+ip dhcp snooping trust
+exit
+interface te1/1/1-2
+switchport mode trunk
+ip dhcp snooping trust
+channel-group 1 mode active
+exit
+
+***START***
+username admin privilege 15 password R0ck&r011
+line console 0
+login local
+line vty 0 15
+exit
+login local
+hostname
+exit
+*** Config Vlan***
+vlan XXX
+name Vlan-describe
+
+***config Interface***
+default interface // To reset interface config can be used with range as well
+interface gi1/0/1 // also TwoG or TenG
+interface range gi1/0/1-24
+
+*** Config Access Points***
+interface GigabitEthernet1/0/7
+ description ***APs***
+ switchport trunk native vlan 112
+ switchport mode trunk
+
+*** Config Data&Voice***
+interface GigabitEthernet0/28
+ description ***DATA&VOICE***
+ switchport access vlan 18
+ switchport voice vlan 28
+ spanning-tree portfast
+
+***Config Other Port***
+interface GigabitEthernet1/0/14
+ description ***ACCESS-CTRL***
+ switchport access vlan 120
+ switchport mode access
+
+***Config UPLINK***
+interface GigabitEthernet0/49
+ description ***UPLINK TO AQUSHJBH4IDF1SW***
+ switchport mode trunk
+ ip dhcp snooping trust
+
+***Config UPLINK with Channel Group***
+interface GigabitEthernet0/52
+ description ***UPLINK TO AQUSHJBCDISSW***
+ switchport mode trunk
+ channel-group 1 mode active
+ ip dhcp snooping trust
+
+***Config Managment VLAN and give IP for the switch***
+interface Vlan100
+ description ***MGNT***
+ ip address 172.10.0.66 255.255.255.0
+
+*** Gateway Configuration and HTTP GUI***
+ip default-gateway 172.10.0.1
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
